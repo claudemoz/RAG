@@ -1,0 +1,17 @@
+{
+  "name": "rag",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "rag": "node --env-file=.env premier-rag.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "@huggingface/transformers": "^4.3.0"
+  }
+}

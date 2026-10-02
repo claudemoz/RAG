@@ -1,0 +1,6 @@
+npm init -y
+npm pkg set type=module
+npm install @anthropic-ai/sdk @huggingface/transformers
+
+node --env-file=.env premier-rag.ts
+node --env-file=.env premier-rag.ts "Mon fils a de la fièvre, je dois rester avec lui. Je pose quoi ?"
