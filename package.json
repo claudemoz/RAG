@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "rag": "node --env-file=.env premier-rag.ts"
+    "rag": "node --env-file=.env premier-rag.ts",
+    "verifier": "node --env-file=.env src/outils/verifier-config.ts",
+    "typecheck": "tsc -p ."
   },
   "keywords": [],
   "author": "",
@@ -12,6 +14,8 @@
   "type": "module",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",
-    "@huggingface/transformers": "^4.3.0"
+    "@huggingface/transformers": "^4.3.0",
+    "openai": "^7.32.0",
+    "zod": "^4.6.5"
   }
 }
