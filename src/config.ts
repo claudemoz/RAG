@@ -12,6 +12,7 @@ const Schema = z
     ANTHROPIC_API_KEY: z.string().optional(),
     OPENAI_API_KEY: z.string().optional(),
     VOYAGE_API_KEY: z.string().optional(),
+    DATABASE_URL: z.string().regex(/^postgres(ql)?:\/\//, "attendu : postgres://utilisateur:mot-de-passe@hôte:port/base"),
   })
   .superRefine((env, ctx) => {
     // Chaque fournisseur utilisé doit avoir sa clé

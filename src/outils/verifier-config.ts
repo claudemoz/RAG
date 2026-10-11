@@ -4,6 +4,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 import { pipeline } from "@huggingface/transformers";
 import { config } from "../config.ts";
+import { pool } from "../db.ts";
+
 
 async function verifier(nom: string, test: () => Promise<string>) {
   try {
@@ -51,3 +53,17 @@ await verifier("modèle de génération", async () => {
 
 // 2. Le modèle d'embedding répond-il ?
 await verifier("modèle d'embedding", async () => `${(await vecteurDeTest()).length} dimensions`);
+
+// 3. La base répond-elle, et l'extension vector y est-elle active ?
+await verifier("base de données", async () => {
+  const { rows } = await pool
+    .query<{ pg: string; vector: string | null }>(
+      "SELECT current_setting('server_version') AS pg, (SELECT extversion FROM pg_extension WHERE extname = 'vector') AS vector",
+    )
+    .catch((erreur: NodeJS.ErrnoException) => {
+      throw new Error(`${erreur.message || erreur.code} (la base est-elle lancée ? npm run db:up)`);
+    });
+  if (!rows[0].vector) throw new Error("extension vector absente de la base");
+  return `PostgreSQL ${rows[0].pg}, pgvector ${rows[0].vector}`;
+});
+await pool.end();
