@@ -2,7 +2,7 @@
 id: FAQ-RH
 titre: FAQ RH de Kalyo
 type: faq
-date_effet: 2026-10-01
+date_effet: 2026-03-01
 acces: tous
 langue: fr
 site: [lyon, nantes]
